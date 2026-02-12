@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru.en/ro/fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEO-Market.store | Глобальный маркетплейс</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0f0f0f; color: #ffffff; font-family: 'Inter', sans-serif; }
+        .orange-gradient { background: linear-gradient(90deg, #ff8c00, #ff4500); }
+        .silver-text { color: #c0c0c0; text-shadow: 0 0 5px rgba(192, 192, 192, 0.5); }
+        .product-card { background: #1a1a1a; border: 1px solid #333; transition: 0.3s; }
+        .product-card:hover { border-color: #ff8c00; transform: translateY(-5px); }
+        .silver-border { border: 1px solid #c0c0c0; }
+        /* Стили для бесконечной ленты */
+        #loader { display: none; text-align: center; padding: 20px; color: #ff8c00; }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <nav class="sticky top-0 z-50 bg-black border-b border-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-3xl font-bold italic orange-gradient bg-clip-text text-transparent">LEO-MARKET</div>
+            
+            <div class="hidden md:flex space-x-6 silver-text">
+                <a href="#" class="hover:text-orange-500">Женское (S-6XL)</a>
+                <a href="#" class="hover:text-orange-500">Мужское</a>
+                <a href="#" class="hover:text-orange-500">Камни</a>
+                <a href="#" class="hover:text-orange-500">Обувь</a>
+            </div>https://images.unsplash.com
+
+            <div class="flex items-center space-x-4">
+                <select id="currency" class="bg-gray-900 silver-border text-sm p-1 rounded">
+                    <option>USD ($)</option>
+                    <option>EUR (€)</option>
+                    <option>UAH (₴)</option>
+                    <option>MDL (L)</option>
+                </select>
+                <div class="silver-text text-xl">🛒</div>
+                <button class="orange-gradient px-4 py-2 rounded font-bold text-black hover:opacity-80">Войти</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Главный баннер -->
+    <header class="container mx-auto mt-6 p-4">
+        <div class="relative overflow-hidden rounded-2xl h-64 flex items-center justify-center orange-gradient">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-black text-black uppercase tracking-tighter">Все заказы в одной посылке</h1>
+                <p class="text-white font-medium mt-2">Европа • Азия • Глобальная доставка LEO</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Лента товаров (Категории) -->
+    <main class="container mx-auto p-4">
+        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            
+            <!-- Карточка товара 1 -->
+            <div class="product-card rounded-lg overflow-hidden p-3">
+                <div class="h-48 bg-gray-800 rounded mb-2 flex items-center justify-center silver-text">Lingerie 6XL</div>
+                <h3 class="font-bold text-sm">Кружевное белье (S-XXXXXXL)</h3>
+                <p class="text-orange-500 font-bold mt-1">€24.99</p>
+                <button class="w-full mt-3 border border-silver text-silver py-1 rounded hover:bg-white hover:text-black transition text-sm">В корзину</button>
+            </div>
+
+            <!-- Карточка товара 2 -->
+            <div class="product-card rounded-lg overflow-hidden p-3">
+                <div class="h-48 bg-gray-800 rounded mb-2 flex items-center justify-center silver-text">Natural Gemstone</div>
+                <h3 class="font-bold text-sm">Аметист натуральный (Бижутерия)</h3>
+                <p class="text-orange-500 font-bold mt-1">€45.00</p>
+                <button class="w-full mt-3 border border-silver text-silver py-1 rounded hover:bg-white hover:text-black transition text-sm">В корзину</button>
+            </div>
+
+            <!-- Карточка товара 3 -->
+            <div class="product-card rounded-lg overflow-hidden p-3">
+                <div class="h-48 bg-gray-800 rounded mb-2 flex items-center justify-center silver-text">Men's Shirts</div>
+                <h3 class="font-bold text-sm">Мужская рубашка (Premium)</h3>
+                <p class="text-orange-500 font-bold mt-1">€39.99</p>
+                <button class="w-full mt-3 border border-silver text-silver py-1 rounded hover:bg-white hover:text-black transition text-sm">В корзину</button>
+            </div>
+
+            <!-- И так далее... -->
+        </div>
+
+        <!-- Индикатор загрузки бесконечной ленты -->
+        <div id="loader">Загрузка новых товаров LEO...</div>
+    </main>
+
+    <script>
+        // Скрипт имитации бесконечной ленты
+        window.onscroll = function() {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+                loadMoreProducts();
+            }
+        };
+
+        function loadMoreProducts() {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'block';
+            
+            setTimeout(() => {
+                const grid = document.getElementById('product-grid');
+                for (let i = 0; i < 5; i++) {
+                    const newItem = grid.children[Math.floor(Math.random() * grid.children.length)].cloneNode(true);
+                    grid.appendChild(newItem);
+                }
+                loader.style.display = 'none';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
